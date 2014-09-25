@@ -1,0 +1,31 @@
+
+R version 3.1.1 (2014-07-10) -- "Sock it to Me"
+Copyright (C) 2014 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> rm(list=ls())
+> packs <- c("foreign")
+> lapply(packs, library, character.only=TRUE)
+[[1]]
+[1] "foreign"   "stats"     "graphics"  "grDevices" "utils"     "datasets" 
+[7] "methods"   "base"     
+
+> 
+> d_ddi <- read.dta("./data/PCI2012_DDI_cleanH_final.dta")
+Error in read.dta("./data/PCI2012_DDI_cleanH_final.dta") : 
+  unable to open file: 'No such file or directory'
+Execution halted
