@@ -1,0 +1,6 @@
+# Ignore data files
+data/*
+
+.Rproj.user
+.Rhistory
+.RData
