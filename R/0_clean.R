@@ -22,6 +22,7 @@ names(d_ddi)
 cDAY_OF_ACB <- ymd("2012-08-21")
 d_ddi <- d_ddi %>%
   mutate(answerdate = mdy(answerdate)) %>%
-  mutate(days_after_ACB = as.numeric(answerdate - cDAY_OF_ACB) / 3600 / 24)
+  mutate(days_after_ACB = as.numeric(answerdate - cDAY_OF_ACB) / 3600 / 24) %>%
+  mutate(whether_after_ACB = days_after_ACB >= 0)
 
 save(d_ddi, ddi_labels, file="../data/PCI2012_DDI.RData")

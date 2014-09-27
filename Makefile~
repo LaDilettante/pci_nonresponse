@@ -1,10 +1,9 @@
 R_OPTS=--no-save --no-restore --no-init-file --no-site-file
 
-TEXDIR = writeup
-WRITEUPS = $(TEXDIR)/prelim_result.pdf
-
+TEXDIR=writeup
 TEXEXTRAFILES := $(wildcard $(TEXDIR)/*.aux $(TEXDIR)/*.log $(TEXDIR)/*.toc $(TEXDIR)/*.blg $(TEXDIR)/*.bbl $(TEXDIR)/*.synctex.gz)
-
+WRITEUPS := $(wildcard $(TEXDIR)/*.pdf)
+PDFFIGS := $(wildcard $(FIGDIR)/*.pdf)
 
 all: $(WRITEUPS)
 

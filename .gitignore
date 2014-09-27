@@ -1,6 +1,9 @@
 # Ignore data files
 data/*
 
+# Ignore graphics
+*.pdf
+
 .Rproj.user
 .Rhistory
 .RData
