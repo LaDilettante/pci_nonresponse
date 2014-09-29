@@ -1,0 +1,159 @@
+\documentclass{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Linux Libertine O}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{vietnamese}
+
+\usepackage{xcolor}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+
+In the D form (cost of doing business), many questions have a smaller response rate after ACB. The following graph shows the 95\% confidence interval of (Nonresponse beforeACB - Nonresponse afterACB).
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-1} 
+
+}
+
+
+
+\end{knitrout}
+
+Let's take a look at some questions of interest and also focus on the effect size. (Indeed, given our sample size, any difference is very likely to be statistically significant.)
+
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Mon Sep 29 16:30:20 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rll}
+  \hline
+ & 1 & 2 \\ 
+  \hline
+1 & d10 & Paying informal charges is common \\ 
+  2 & d11 & How much to pay officials informally \\ 
+  3 & d12 & Having paid informal charges, service is delivered as expected \\ 
+  4 & d13\_2010 & Has firm ever provided goods and services for State offices? \\ 
+  5 & d14\_2010 & total number of activities \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-3} 
+
+}
+
+
+
+\end{knitrout}
+
+There is very low nonresponse rate both before and after ACB on Question \verb`d10`, which asks about common practice regarding informal charge. This question is probably considered ``non-sensitive'' by firms. 
+
+On the other hand, Questions \verb`d11` and \verb`d12` are more sensitive, as shown by the higher non response rate even before ACB. For these sensitive questions, the ACB scandals worsens the nonresponse rate by a large margin. For example, question \verb`d11`, ``How much to pay officials informally'', has the nonresponse rate increase from 0.28 to 0.4, a 42.56\% increase.
+
+We see that the experimental Question \verb`d14_2010` has a high non response rate --- this is because the survey allows skipping this question as shown below.
+
+\begin{quote}
+15. Trong nhiều dịp, doanh nghiệp thường có cơ hội cung cấp dịch vụ kinh doanh cho công chức nhà nước hoặc doanh nghiệp nhà nước. Đôi khi, giao dịch có thể lớn như các dự án xây dựng cơ sở hạ tầng hoặc cung cấp máy móc, thiết bị cho các cơ quan Nhà nước. Hoặc các hoạt động kinh doanh tương đối nhỏ và đơn giản như dịch vụ photocopy, bảo dưỡng, sửa chữa máy móc thiết bị,hoặc cung cấp dịch vụ ăn uống, nhà hàng cho cơ quan Nhà nước.
+
+Với bất kỳ quy mô nào ở trên, doanh nghiệp của bạn đã bao giờ cung cấp các dịch vụ kinh doanh cho các cơ quan Nhà nước (các cấp xã, phường, quận, huyện, các cơ quan cấp tỉnh hoặc các cán bộ Nhà nước…) chưa? 
+
+{\color{red}- Có (Nếu có, vui lòng trả lời câu 16 dưới đây)
+
+- Không (Vui lòng chuyển sang câu 17)
+
+- Không biết (Vui lòng chuyển sang câu 17)}
+\end{quote}
+
+However, we still have to explain the increase in nonresponse rate after ACB, indicating that this experimental question is also considered sensitive. Indeed, probit regression shows that both after ACB and form B (which contains the sensitive \verb`hoa hồng` option) increases the non response rate.
+
+% latex table generated in R 3.1.1 by xtable 1.7-4 package
+% Mon Sep 29 16:30:21 2014
+\begin{table}[ht]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Estimate & Std. Error & z value & Pr($>$$|$z$|$) \\ 
+  \hline
+(Intercept) & 0.4274 & 0.0226 & 18.87 & 0.0000 \\ 
+  formB & 0.1538 & 0.0335 & 4.59 & 0.0000 \\ 
+  whether\_after\_ACBTRUE & 0.4632 & 0.0525 & 8.82 & 0.0000 \\ 
+  formB:whether\_after\_ACBTRUE & -0.0896 & 0.0739 & -1.21 & 0.2255 \\ 
+   \hline
+\end{tabular}
+\end{table}
+
+
+\begin{quote}
+16. Nếu Có , vui lòng xem danh mục các hoạt động dưới đây mà các doanh nghiệp thường thực hiện để thúc đẩy việc cung cấp hàng hoá hoặc dịch vụ cho cơ quan Nhà nước: 
+
+- Phát tờ rơi, bản giới thiệu tại các cơ quan Nhà nước để quảng bá cho hàng hoá và dịch vụ của doanh nghiệp
+
+- Mở cơ sở kinh doanh hoặc chi nhánh của doanh nghiệp gần các cơ quan Nhà nước để dễ tiếp cận các khách hàng tiềm năng.
+
+{\color{red}- Trả "hoa hồng" cho người có liên quan để đảm bảo rằng doanh nghiệp được quyền cung cấp dịch vụ. Form B only}
+
+{\color{blue}- Nhờ bạn bè, người quen trong cơ quan nhà nước giới thiệu để có được quyền cung cấp hàng hoá và dịch vụ cho cơ quan Nhà nước. Could this be considered corruption as well?}
+
+- Tham gia các cuộc họp, buổi gặp gỡ của cơ quan Nhà nước để tiếp xúc các cán bộ có liên quan và giới thiệu về hàng hoá và dịch vụ của doanh nghiệp.
+\end{quote}
+
+\end{document}

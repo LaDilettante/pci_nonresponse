@@ -13,24 +13,8 @@ load("../data/PCI2012_DDI.RData")
 # Grep all the questions in section D
 questions <- names(d_ddi)[str_detect(names(d_ddi), "^d[0-9]")]
 
-# Function to run t test
-f_ttest <- function(df, varname) {
-  var <- df[ , varname]
-  res <- with(df, t.test(is.na(var) ~ whether_after_ACB))
-  return(data.frame(
-    varname=varname,
-    varlabel=ddi_labels[[varname]],
-    beforeACB=unname(res$estimate[1]),
-    afterACB=unname(res$estimate[2]),
-    conf.int.low95=unname(res$conf.int[1]),
-    conf.int.hi95=unname(res$conf.int[2]),
-    p.value=res$p.value,
-    sig=ifelse(res$p.value <= 0.01, "***", 
-               ifelse(res$p.value <= 0.05, "**",
-                      ifelse(res$p.value <= 0.1, "*", "")))))
-}
-
 # Run the ttest on multiple variables
+# f_ttest from functions.R
 tmp <- ldply(questions, function(x) f_ttest(df=d_ddi, varname=x))
 tmp <- tmp[complete.cases(tmp), ]
 tmp2 <- tmp[tmp[, "p.value"] < 0.05 , ]

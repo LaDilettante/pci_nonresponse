@@ -1,0 +1,120 @@
+\documentclass{article}
+
+\usepackage{fontspec}
+\setmainfont[Ligatures=TeX]{Linux Libertine O}
+\usepackage{polyglossia}
+\setmainlanguage{english}
+\setotherlanguage{vietnamese}
+
+\usepackage{xcolor}
+
+\begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+# Package
+rm(list=ls())
+packs <- c("stringr", "plyr", "ggplot2", "xtable", "dplyr")
+new.packs <- packs[!(packs %in% installed.packages()[ , "Package"])]
+if(length(new.packs)) install.packages(new.packs, repos='http://cran.us.r-project.org')
+lapply(packs, library, character.only=TRUE)
+rm(packs, new.packs)
+# Convenient functions
+source('../R/functions.R')
+# set global chunk options
+options(scipen = 1, digits = 2) # Why doesn't this work?!?!?
+opts_chunk$set(fig.align='center', fig.show='hold',
+               echo=FALSE, results='hold')
+
+@
+
+In the D form (cost of doing business), many questions have a smaller response rate after ACB. The following graph shows the 95\% confidence interval of (Nonresponse beforeACB - Nonresponse afterACB).
+
+<<fig.width=7, fig.height=5>>=
+load("../data/PCI2012_DDI.RData")
+
+# Grep all the questions in section D
+questions <- names(d_ddi)[str_detect(names(d_ddi), "^d[0-9]")]
+
+# Run the ttest on multiple variables
+# f_ttest from functions.R
+res_ttest <- ldply(questions, function(x) f_ttest(df=d_ddi, varname=x))
+res_ttest <- res_ttest[complete.cases(res_ttest), ]
+res_ttest_significant <- res_ttest[res_ttest[, "p.value"] < 0.05 , ]
+
+# Plotting result
+ggplot(data=res_ttest, aes(x=varname)) +
+  geom_errorbar(aes(ymin=conf.int.low95, ymax=conf.int.hi95)) +
+  geom_hline(aes(yintercept=0, col="red")) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+  labs(title="Nonresponse Rate Before ACB - Nonreponse Rate After ACB",
+       x="Variable",
+       y="95% confidence interval")
+@
+
+Let's take a look at some questions of interest and also focus on the effect size. (Indeed, given our sample size, any difference is very likely to be statistically significant.)
+
+<<results='asis'>>=
+xtable(do.call(rbind, lapply(c("d10", "d11", "d12", "d13_2010", "d14_2010"),
+       function(x) c(x, ddi_labels[[x]]))))
+@
+
+<<fig.width=7, fig.height=4>>=
+res_proptest <- ldply(c("d10", "d11", "d12", "d13_2010", "d14_2010"), 
+                      function(x) f_proptest(d_ddi, x, "whether_after_ACB"))
+ggplot(data=res_proptest, aes(fill=factor(whether_after_ACB), x=varname, y=mean)) +
+  geom_bar(position="dodge", stat="identity") +
+  geom_errorbar(aes(ymin=mean.low95, ymax=mean.hi95), 
+                position=position_dodge(width=0.9), width=0.4) +
+  scale_fill_discrete(name="Whether after ACB") +
+  labs(title="Comparing nonresponse rate before/after ACB",
+       x="Question name",
+       y="Rate of nonresponse")
+mean.d11.before <- res_proptest %>%
+                      filter(varname=="d11" & whether_after_ACB==0) %>%
+                      select(mean)
+mean.d11.after <- res_proptest %>%
+                      filter(varname=="d11" & whether_after_ACB==1) %>%
+                      select(mean)
+@
+
+There is very low nonresponse rate both before and after ACB on Question \verb`d10`, which asks about common practice regarding informal charge. This question is probably considered ``non-sensitive'' by firms. 
+
+On the other hand, Questions \verb`d11` and \verb`d12` are more sensitive, as shown by the higher non response rate even before ACB. For these sensitive questions, the ACB scandals worsens the nonresponse rate by a large margin. For example, question \verb`d11`, ``\Sexpr{ddi_labels[["d11"]]}'', has the nonresponse rate increase from \Sexpr{round(mean.d11.before, 2)} to \Sexpr{round(mean.d11.after, 2)}, a \Sexpr{ round((mean.d11.after - mean.d11.before) / mean.d11.before * 100, 2)}\% increase.
+
+We see that the experimental Question \verb`d14_2010` has a high non response rate --- this is because the survey allows skipping this question as shown below.
+
+\begin{quote}
+15. Trong nhiều dịp, doanh nghiệp thường có cơ hội cung cấp dịch vụ kinh doanh cho công chức nhà nước hoặc doanh nghiệp nhà nước. Đôi khi, giao dịch có thể lớn như các dự án xây dựng cơ sở hạ tầng hoặc cung cấp máy móc, thiết bị cho các cơ quan Nhà nước. Hoặc các hoạt động kinh doanh tương đối nhỏ và đơn giản như dịch vụ photocopy, bảo dưỡng, sửa chữa máy móc thiết bị,hoặc cung cấp dịch vụ ăn uống, nhà hàng cho cơ quan Nhà nước.
+
+Với bất kỳ quy mô nào ở trên, doanh nghiệp của bạn đã bao giờ cung cấp các dịch vụ kinh doanh cho các cơ quan Nhà nước (các cấp xã, phường, quận, huyện, các cơ quan cấp tỉnh hoặc các cán bộ Nhà nước…) chưa? 
+
+{\color{red}- Có (Nếu có, vui lòng trả lời câu 16 dưới đây)
+
+- Không (Vui lòng chuyển sang câu 17)
+
+- Không biết (Vui lòng chuyển sang câu 17)}
+\end{quote}
+
+However, we still have to explain the increase in nonresponse rate after ACB, indicating that this experimental question is also considered sensitive. Indeed, probit regression shows that both after ACB and form B (which contains the sensitive \verb`hoa hồng` option) increases the non response rate.
+
+<<results='asis'>>=
+xtable(glm(data=d_ddi, 
+           is.na(d14_2010) ~ form + whether_after_ACB + form:whether_after_ACB, 
+           family=binomial(link="probit")))
+@
+
+\begin{quote}
+16. Nếu Có , vui lòng xem danh mục các hoạt động dưới đây mà các doanh nghiệp thường thực hiện để thúc đẩy việc cung cấp hàng hoá hoặc dịch vụ cho cơ quan Nhà nước: 
+
+- Phát tờ rơi, bản giới thiệu tại các cơ quan Nhà nước để quảng bá cho hàng hoá và dịch vụ của doanh nghiệp
+
+- Mở cơ sở kinh doanh hoặc chi nhánh của doanh nghiệp gần các cơ quan Nhà nước để dễ tiếp cận các khách hàng tiềm năng.
+
+{\color{red}- Trả "hoa hồng" cho người có liên quan để đảm bảo rằng doanh nghiệp được quyền cung cấp dịch vụ. Form B only}
+
+{\color{blue}- Nhờ bạn bè, người quen trong cơ quan nhà nước giới thiệu để có được quyền cung cấp hàng hoá và dịch vụ cho cơ quan Nhà nước. Could this be considered corruption as well?}
+
+- Tham gia các cuộc họp, buổi gặp gỡ của cơ quan Nhà nước để tiếp xúc các cán bộ có liên quan và giới thiệu về hàng hoá và dịch vụ của doanh nghiệp.
+\end{quote}
+
+\end{document}

@@ -13,6 +13,14 @@ load("./data/PCI2012_DDI.RData")
 labs <- do.call(rbind, lapply(names(d_ddi), function(x) c(x, ddi_labels[[x]])))
 head(d_ddi$form)
 names(d_ddi)
+
+f_ttest(d_ddi, "d14_2010")
+with(d_ddi, )
+
+t.test(is.na(d_ddi$d14_2010[d_ddi$form=="A"]), d_ddi$whether_after_ACB)
+t.test(is.na(d_ddi$d14_2010[d_ddi$form=="B"]), d_ddi$whether_after_ACB)
+# The form B, which gets the corruption option has more non response
+
 # For DDI
 # d14_2010 is experimental. Form A no corruption option
 
