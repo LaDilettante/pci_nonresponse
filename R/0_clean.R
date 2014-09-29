@@ -3,7 +3,7 @@ rm(list=ls())
 # Set up package dependencies
 packs <- c("foreign", "lubridate", "dplyr")
 new.packs <- packs[!(packs %in% installed.packages()[,"Package"])]
-if(length(new.packs)) install.packages(new.packs)
+if(length(new.packs)) install.packages(new.packs, repos='http://cran.us.r-project.org')
 lapply(packs, library, character.only=TRUE)
 rm(packs)
 

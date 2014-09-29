@@ -1,9 +1,12 @@
 rm(list=ls())
 packs <- c("stringr", "plyr", "ggplot2")
 new.packs <- packs[!(packs %in% installed.packages()[ , "Package"])]
-lapply(new.packs, install.packages)
+if(length(new.packs)) install.packages(new.packs, repos='http://cran.us.r-project.org')
 lapply(packs, library, character.only=TRUE)
+rm(packs)
 
+# Load functions
+source("./functions.R")
 # Load data
 load("../data/PCI2012_DDI.RData")
 
