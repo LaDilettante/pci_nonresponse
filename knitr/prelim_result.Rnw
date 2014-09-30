@@ -19,7 +19,7 @@
 <<setup, include=FALSE, cache=FALSE>>=
 # Package
 rm(list=ls())
-packs <- c("stringr", "lubridate", "reshape2", "plyr", "ggplot2", "xtable", "dplyr")
+packs <- c("stringr", "lubridate", "reshape2", "ggplot2", "xtable", "plyr", "dplyr", "gtools")
 new.packs <- packs[!(packs %in% installed.packages()[ , "Package"])]
 if(length(new.packs)) install.packages(new.packs, repos='http://cran.us.r-project.org')
 lapply(packs, library, character.only=TRUE)
@@ -148,7 +148,8 @@ But perhaps even form A contains options that may be considered sensitive as wel
 Question \verb`d10`, which does not have different non response rate before and after ACB, is the only one that does not have a trend. The other do have a clear trend.
 
 <<fig.width=7, fig.height=5, warning=FALSE>>=
-d_ddi_timeseries <- melt(data=d_ddi[, c("answerdate", "d10", "d11", "d12", "d13_2010", "d14_2010")], 
+d_ddi_timeseries <- melt(data=d_ddi[, c("answerdate", "b1", "c1", "e8", "e9",
+                                        "d10", "d11", "d12", "d13_2010", "d14_2010")], 
                         id=c("answerdate")) %>%
   group_by(answerdate, variable) %>%
   summarize(mean = mean(is.na(value)))  
@@ -186,6 +187,22 @@ ggplot(data=d_ddi_ceo, aes(x=answerdate, y=mean)) +
   facet_wrap( ~ background) +
   geom_vline(aes(xintercept=as.numeric(ymd('2012-08-21')), col="red")) +
   labs(title="Nonresponse rate across time, disaggregated on CEO background",
+       y="Nonresponse rate")
+@
+
+\section{Length of the survey}
+
+<<>>=
+questions_main <- names(d_ddi)[str_detect(names(d_ddi), "^[a-z][0-9]*$")]
+questions_main <- mixedsort(questions_main)
+t3 <- melt(data=d_ddi[ , c("answerdate", questions_main)], id=c("answerdate")) %>%
+  group_by(answerdate, variable) %>%
+  summarize(mean = mean(is.na(value)))
+ggplot(data=t3, aes(x=answerdate, y=mean)) +
+  geom_point() +
+  geom_vline(aes(xintercept=as.numeric(ymd('2012-08-21')), col="red")) +
+  facet_wrap(~ variable) +
+  labs(title="Nonresponse rate on various questions across time",
        y="Nonresponse rate")
 @
 
