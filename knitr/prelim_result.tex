@@ -84,7 +84,7 @@ In the D form (cost of doing business), many questions have a smaller response r
 Let's take a look at some questions of interest and also focus on the effect size. (Indeed, given our sample size, any difference is very likely to be statistically significant.)
 
 % latex table generated in R 3.1.1 by xtable 1.7-4 package
-% Tue Sep 30 16:44:14 2014
+% Tue Sep 30 17:19:50 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rll}
@@ -134,7 +134,7 @@ Với bất kỳ quy mô nào ở trên, doanh nghiệp của bạn đã bao gi�
 However, we still have to explain the increase in nonresponse rate after ACB, indicating that this experimental question is also considered sensitive by firms. Indeed, probit regression shows that both after ACB and form B (which contains the sensitive \verb`hoa hồng` option) increases the non response rate.
 
 % latex table generated in R 3.1.1 by xtable 1.7-4 package
-% Tue Sep 30 16:44:15 2014
+% Tue Sep 30 17:19:50 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -222,6 +222,45 @@ Let's disaggregate based on CEO background. There is still a trendline even for 
 
 
 \end{knitrout}
+
+\section{Does afterACB accelerate trending?}
+
+
+% Table created by stargazer v.5.1 by Marek Hlavac, Harvard University. E-mail: hlavac at fas.harvard.edu
+% Date and time: Tue, Sep 30, 2014 - 05:19:56 PM
+\begin{table}[!htbp] \centering 
+  \caption{} 
+  \label{} 
+\begin{tabular}{@{\extracolsep{5pt}}lccc} 
+\\[-1.8ex]\hline 
+\hline \\[-1.8ex] 
+ & \multicolumn{3}{c}{\textit{Dependent variable:}} \\ 
+\cline{2-4} 
+\\[-1.8ex] & is.na(d10) & is.na(d11) & is.na(d12) \\ 
+\\[-1.8ex] & (1) & (2) & (3)\\ 
+\hline \\[-1.8ex] 
+ whether\_after\_ACB & $-$0.340$^{***}$ & 0.140$^{**}$ & 0.190$^{***}$ \\ 
+  & (0.085) & (0.062) & (0.062) \\ 
+  & & & \\ 
+ days\_after\_ACB & $-$0.001 & 0.011$^{***}$ & 0.009$^{***}$ \\ 
+  & (0.001) & (0.001) & (0.001) \\ 
+  & & & \\ 
+ whether\_after\_ACBTRUE:days\_after\_ACB & 0.044$^{***}$ & $-$0.036$^{***}$ & $-$0.034$^{***}$ \\ 
+  & (0.007) & (0.005) & (0.005) \\ 
+  & & & \\ 
+ Constant & $-$1.300$^{***}$ & $-$0.190$^{***}$ & $-$0.140$^{***}$ \\ 
+  & (0.045) & (0.035) & (0.035) \\ 
+  & & & \\ 
+\hline \\[-1.8ex] 
+Observations & 8,177 & 8,177 & 8,177 \\ 
+Log Likelihood & $-$2,750.000 & $-$4,922.000 & $-$5,195.000 \\ 
+Akaike Inf. Crit. & 5,509.000 & 9,852.000 & 10,399.000 \\ 
+\hline 
+\hline \\[-1.8ex] 
+\textit{Note:}  & \multicolumn{3}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+\end{tabular} 
+\end{table} 
+
 
 
 \end{document}

@@ -19,7 +19,7 @@
 <<setup, include=FALSE, cache=FALSE>>=
 # Package
 rm(list=ls())
-packs <- c("stringr", "lubridate", "reshape2", "ggplot2", "xtable", "plyr", "dplyr", "gtools")
+packs <- c("stringr", "lubridate", "reshape2", "ggplot2", "xtable", "plyr", "dplyr", "gtools", "stargazer")
 new.packs <- packs[!(packs %in% installed.packages()[ , "Package"])]
 if(length(new.packs)) install.packages(new.packs, repos='http://cran.us.r-project.org')
 lapply(packs, library, character.only=TRUE)
@@ -204,6 +204,17 @@ ggplot(data=t3, aes(x=answerdate, y=mean)) +
   facet_wrap(~ variable) +
   labs(title="Nonresponse rate on various questions across time",
        y="Nonresponse rate")
+@
+
+\section{Does afterACB accelerate trending?}
+
+<<results='asis'>>=
+stargazer(glm(is.na(d10) ~ whether_after_ACB + days_after_ACB + whether_after_ACB:days_after_ACB,
+            family=binomial(link="probit"), data=d_ddi), 
+          glm(is.na(d11) ~ whether_after_ACB + days_after_ACB + whether_after_ACB:days_after_ACB,
+            family=binomial(link="probit"), data=d_ddi),
+          glm(is.na(d12) ~ whether_after_ACB + days_after_ACB + whether_after_ACB:days_after_ACB,
+            family=binomial(link="probit"), data=d_ddi))
 @
 
 
