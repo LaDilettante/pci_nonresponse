@@ -56,11 +56,18 @@
 \setotherlanguage{vietnamese}
 
 \usepackage{xcolor}
+
+\title{PCI nonresponse -- preliminary result}
+\author{Anh Le \\
+        Duke University}
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 
+\maketitle
 
 
+
+\section{Non response rate for various questions}
 In the D form (cost of doing business), many questions have a smaller response rate after ACB. The following graph shows the 95\% confidence interval of (Nonresponse beforeACB - Nonresponse afterACB).
 
 \begin{knitrout}
@@ -77,7 +84,7 @@ In the D form (cost of doing business), many questions have a smaller response r
 Let's take a look at some questions of interest and also focus on the effect size. (Indeed, given our sample size, any difference is very likely to be statistically significant.)
 
 % latex table generated in R 3.1.1 by xtable 1.7-4 package
-% Mon Sep 29 16:30:20 2014
+% Mon Sep 29 23:15:37 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rll}
@@ -109,6 +116,7 @@ There is very low nonresponse rate both before and after ACB on Question \verb`d
 
 On the other hand, Questions \verb`d11` and \verb`d12` are more sensitive, as shown by the higher non response rate even before ACB. For these sensitive questions, the ACB scandals worsens the nonresponse rate by a large margin. For example, question \verb`d11`, ``How much to pay officials informally'', has the nonresponse rate increase from 0.28 to 0.4, a 42.56\% increase.
 
+\section{Does experimental question help with the nonresponse rate?}
 We see that the experimental Question \verb`d14_2010` has a high non response rate --- this is because the survey allows skipping this question as shown below.
 
 \begin{quote}
@@ -123,10 +131,10 @@ Với bất kỳ quy mô nào ở trên, doanh nghiệp của bạn đã bao gi�
 - Không biết (Vui lòng chuyển sang câu 17)}
 \end{quote}
 
-However, we still have to explain the increase in nonresponse rate after ACB, indicating that this experimental question is also considered sensitive. Indeed, probit regression shows that both after ACB and form B (which contains the sensitive \verb`hoa hồng` option) increases the non response rate.
+However, we still have to explain the increase in nonresponse rate after ACB, indicating that this experimental question is also considered sensitive by firms. Indeed, probit regression shows that both after ACB and form B (which contains the sensitive \verb`hoa hồng` option) increases the non response rate.
 
 % latex table generated in R 3.1.1 by xtable 1.7-4 package
-% Mon Sep 29 16:30:21 2014
+% Mon Sep 29 23:15:37 2014
 \begin{table}[ht]
 \centering
 \begin{tabular}{rrrrr}
@@ -142,6 +150,21 @@ However, we still have to explain the increase in nonresponse rate after ACB, in
 \end{table}
 
 
+The trouble is that the non response rate goes up for form A as well, even though this is supposed to not look like a question about corruption.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-5} 
+
+}
+
+
+
+\end{knitrout}
+
+But perhaps even form A contains options that may be considered sensitive as well? Consider the option highlighted in blue:
+
 \begin{quote}
 16. Nếu Có , vui lòng xem danh mục các hoạt động dưới đây mà các doanh nghiệp thường thực hiện để thúc đẩy việc cung cấp hàng hoá hoặc dịch vụ cho cơ quan Nhà nước: 
 
@@ -155,5 +178,34 @@ However, we still have to explain the increase in nonresponse rate after ACB, in
 
 - Tham gia các cuộc họp, buổi gặp gỡ của cơ quan Nhà nước để tiếp xúc các cán bộ có liên quan và giới thiệu về hàng hoá và dịch vụ của doanh nghiệp.
 \end{quote}
+
+\section{Nonresponse rate follows a trend}
+
+Question \verb`d10`, which does not have different non response rate before and after ACB, is the only one that does not have a trend. The other do have a clear trend.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-6} 
+
+}
+
+
+
+\end{knitrout}
+
+Let's disaggregate based on CEO background. There is still a trendline even for the most common ``unknown'' category.
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/unnamed-chunk-7} 
+
+}
+
+
+
+\end{knitrout}
+
 
 \end{document}

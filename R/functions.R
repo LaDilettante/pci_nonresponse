@@ -31,3 +31,7 @@ f_proptest <- function(df, varname, groupvar) {
   ))
 }
 
+f_label_table <- function(df, env) {
+  do.call(rbind, lapply(names(df), function(x) c(x, env[[x]])))
+}
+
